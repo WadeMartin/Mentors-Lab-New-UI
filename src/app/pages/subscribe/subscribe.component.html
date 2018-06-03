@@ -1,0 +1,82 @@
+<div class="row">
+  <div class="col-sm-12">
+    <app-card>
+        <div class="row">
+            <div class="container">
+                <div class="row">
+                        <div class="col-md-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control form-control-success" [(ngModel)]="couponCode" placeholder="Use a coupon code">
+                                </div>
+                            </div>
+                            
+                </div>
+        </div>
+            <div class="col-md-4 col-sm-8">
+                <div class="pricingTable">
+                    <div class="pricingTable-header">
+                        <span class="price-value">5<span class="currency">$</span></span>
+                        <h3 class="title">Starter Plan</h3>
+                    </div>
+                    <ul class="pricing-content">
+                        <li>Introduction of your startup</li>
+                        <li>Profile allocation for 2 team mates</li>
+                        <li>Request for 2 skills</li>
+                        <li>Rate mentors and be rated by mentors</li>
+                        <li>-</li>
+                        <li>-</li>
+                        <li>-</li>
+                    </ul>
+                    <button  class="pricingTable-signup btn" [(disabled)]="btnStarter"  (click)="openDialog('firstplan')">Subscribe Now</button>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-8">
+                    <div class="pricingTable green">
+                        <div class="pricingTable-header">
+                            <span class="price-value">20<span class="currency">$</span></span>
+                            <h3 class="title">Seed Plan</h3>
+                        </div>
+                        <ul class="pricing-content">
+                        <li>Introduction of your startup</li>
+                        <li>Profile allocation for 4 team mates</li>
+                        <li>Request for 4 skills</li>
+                        <li>Upload 2 medias (1 video + 1 photo)</li>
+                        <li>Rate mentors and be rated by mentors</li>
+                        <li>-</li>
+                        <li>-</li>
+                        </ul>
+                        <button  class="pricingTable-signup btn" [(disabled)]="btnSeed" (click)="openDialog('secondplan')">Subscribe Now</button>
+                    </div>
+            </div>
+            <div class="col-md-4 col-sm-8">
+                <div class="pricingTable red">
+                    <div class="pricingTable-header">
+                        <span class="price-value">50<span class="currency">$</span></span>
+                        <h3 class="title">Growing Plan</h3>
+                    </div>
+                    <ul class="pricing-content">
+                            <li>Introduction of your startup</li>
+                            <li>Profile allocation for 6 team mates</li>
+                            <li>Request for 6 skills</li>
+                            <li>Upload 6 medias (2 video + 4 photo)</li>
+                            <li>Startup statistics (visits, followers, clicked links)</li>
+                            <li>Don't wait for mentors to contact you! Contact them directly!</li>
+                    </ul>
+                    <button class="pricingTable-signup btn" [(disabled)]="btnGrow"   (click)="openDialog('thirdplan')">Subscribe Now</button>
+                </div>
+            </div>
+        </div>
+    </app-card>
+  </div>
+</div>
+
+
+<p-dialog header="Changing Subscription" [(visible)]="acceptDialog" modal="modal" [responsive]="true" [width]="600" [minWidth]="200" >
+    <!-- <p-messages [(value)]="checkBoxMsg"></p-messages>  -->
+    <p>You are changing your subscription from {{subscribe}} to -> {{toSubscribe}}</p>   
+    <hr>
+    <p-checkbox [(ngModel)]="agreementAccepted" binary="true"></p-checkbox><span> I accept the changes that will be made to my account</span>
+        <p-footer>
+            <button type="button" pButton icon="fa-check" (click)="openCheckout()" label="Submit Changes"></button>
+        </p-footer>
+</p-dialog>

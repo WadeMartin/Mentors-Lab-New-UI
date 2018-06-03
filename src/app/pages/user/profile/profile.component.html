@@ -1,0 +1,467 @@
+<div id="http-loader" *ngIf="isSpinnerVisible">
+    <div class="loader-bg">
+        <!--sk-cube-grid-->
+        <div class="sk-cube-grid" [class.colored]="!backgroundColor" *ngIf="spinner === Spinkit.skCubeGrid">
+            <div class="sk-cube sk-cube1" [style.background-color]='backgroundColor'></div>
+            <div class="sk-cube sk-cube2" [style.background-color]='backgroundColor'></div>
+            <div class="sk-cube sk-cube3" [style.background-color]='backgroundColor'></div>
+            <div class="sk-cube sk-cube4" [style.background-color]='backgroundColor'></div>
+            <div class="sk-cube sk-cube5" [style.background-color]='backgroundColor'></div>
+            <div class="sk-cube sk-cube6" [style.background-color]='backgroundColor'></div>
+            <div class="sk-cube sk-cube7" [style.background-color]='backgroundColor'></div>
+            <div class="sk-cube sk-cube8" [style.background-color]='backgroundColor'></div>
+            <div class="sk-cube sk-cube9" [style.background-color]='backgroundColor'></div>
+        </div>
+        <!--sk-rotating-plane-->
+        <div class="sk-rotating-plane colored-parent" *ngIf="spinner === Spinkit.skRotatingPlane" [style.background-color]='backgroundColor'></div>
+        <!--sk-double-bounce-->
+        <div class="sk-double-bounce" [class.colored]="!backgroundColor" *ngIf="spinner === Spinkit.skDoubleBounce">
+            <div class="double-bounce1" [style.background-color]='backgroundColor'></div>
+            <div class="double-bounce2" [style.background-color]='backgroundColor'></div>
+        </div>
+        <!--sk-wave-->
+        <div class="theme-loader" [class.colored]="!backgroundColor" *ngIf="spinner === Spinkit.skWave">
+            <!--<div class="sk-rect sk-rect1" [style.background-color]='backgroundColor'></div>-->
+            <!--<div class="sk-rect sk-rect2" [style.background-color]='backgroundColor'></div>-->
+            <!--<div class="sk-rect sk-rect3" [style.background-color]='backgroundColor'></div>-->
+            <!--<div class="sk-rect sk-rect4" [style.background-color]='backgroundColor'></div>-->
+            <!--<div class="sk-rect sk-rect5" [style.background-color]='backgroundColor'></div>-->
+          <!-- Pre-loader start -->
+            <div class="ball-scale">
+              <div class='contain'>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+              </div>
+            </div>
+          <!-- Pre-loader end -->
+
+        </div>
+        <!--sk-wandering-cubes-->
+        <div class="sk-wandering-cubes" [class.colored]="!backgroundColor" *ngIf="spinner === Spinkit.skWanderingCubes">
+            <div class="sk-cube sk-cube1" [style.background-color]='backgroundColor'></div>
+            <div class="sk-cube sk-cube2" [style.background-color]='backgroundColor'></div>
+        </div>
+        <!--sk-spinner-pulse-->
+        <div class="sk-spinner sk-spinner-pulse colored-parent" *ngIf="spinner === Spinkit.skSpinnerPulse" [style.background-color]='backgroundColor'></div>
+        <!--sk-chasing-dots-->
+        <div class="sk-chasing-dots" [class.colored]="!backgroundColor" *ngIf="spinner === Spinkit.skChasingDots">
+            <div class="sk-child sk-dot1" [style.background-color]='backgroundColor'></div>
+            <div class="sk-child sk-dot2" [style.background-color]='backgroundColor'></div>
+        </div>
+        <!--sk-three-bounce-->
+        <div class="sk-three-bounce" [class.colored]="!backgroundColor" *ngIf="spinner === Spinkit.skThreeBounce">
+            <div class="sk-child sk-bounce1" [style.background-color]='backgroundColor'></div>
+            <div class="sk-child sk-bounce2" [style.background-color]='backgroundColor'></div>
+            <div class="sk-child sk-bounce3" [style.background-color]='backgroundColor'></div>
+        </div>
+        <!-- material-line -->
+        <div class="sk-line-material" [class.colored]="!backgroundColor" *ngIf="spinner === Spinkit.skLine">
+            <div class="sk-child sk-bounce1" [style.background-color]='backgroundColor'></div>
+        </div>
+
+    </div>
+ 
+</div>
+<input type="file" 
+  #file 
+  [multiple]="(maxFiles > 1)"
+  (change) = "onFileChange($event)"
+  style="display:none" />
+
+  
+  <input type="file" 
+  #doc 
+  [multiple]="(maxFiles > 1)"
+  (change) = "onDocChange($event)"
+  style="display:none" />
+  
+<div *ngIf="!isSpinnerVisible">
+    <div class="row">
+        <div class="col-lg-12">
+          <div class="cover-profile">
+            <div class="profile-bg-img">
+              <img class="profile-bg-img img-fluid" src="assets/images/user-profile/bg-img1.jpg" alt="bg-img">
+              <div class="card-body user-info">
+                <div class="col-md-12">
+                  <div class="media-left">
+                    <a href="javascript:;" (click)="file.click()" class="profile-image">
+                      <img width="200px" height="200px" class="user-img img-circle" [src]="imgURL" alt="user-img">
+                    </a>
+                  </div>
+                  <div class="media-body row">
+                    <div class="col-lg-12">
+                      <div class="user-title">
+                        <h1 style="color: black">{{displayUsername}}</h1>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="pull-right cover-btn">
+                        <button type="button" class="btn btn-primary m-b-10 m-r-10"><i class="icofont icofont-plus"></i> Follow</button>
+                        <button *ngIf="ownerProfile" type="button" [ngClass]="cvDocButtonClass"   (click)="doc.click()"><i class="icofont icofont-file-document"></i>{{cvDoc}}</button>
+                        <button *ngIf="ownerProfile" type="button" class="btn btn-success m-b-10 m-r-10"  (click)="toggleEditProfile()"><i class="icofont {{editProfileIcon}}"></i>{{editProfileText}}</button>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--profile cover end-->
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="md-tabs">
+            <ngb-tabset>
+              <ngb-tab title="Personal Info">
+                <ng-template ngbTabContent>
+                  <div [@fadeInOutTranslate] class="m-t-15">
+                    <!-- personal card start -->
+                    <div class="card">
+                      <div class="card-header">
+                        <h5 class="card-header-text">About Me</h5>
+                       
+                      </div>
+                      <div class="card-body">
+                        <div class="view-info" *ngIf="editProfile">
+                          <div class="row">
+                            <div class="col-lg-12">
+                              <div class="general-info">
+                                <div class="row">
+                                  <div class="col-lg-12 col-xl-6">
+                                    <div class="table-responsive">
+                                      <table class="table m-0">
+                                        <tbody>
+                                        <tr>
+                                          <th scope="row">First Name</th>
+                                          <td>{{user.firstName}}</td>
+                                        </tr>
+                                        <tr>
+                                          <th scope="row">Last Name</th>
+                                          <td>{{user.lastName}}</td>
+                                        </tr>
+                                        <tr>
+                                          <th scope="row">Title</th>
+                                          <td>{{user.title}}</td>
+                                        </tr>
+                                        <tr>
+                                          <th scope="row">Current Employer</th>
+                                          <td>{{user.currentEmployer}}</td>
+                                        </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </div>
+                                  <!-- end of table col-lg-6 -->
+                                  <div class="col-lg-12 col-xl-6">
+                                    <div class="table-responsive">
+                                      <table class="table">
+                                        <tbody>
+                                        <tr>
+                                          <th scope="row">Country</th>
+                                          <td>{{user.country}}</td>
+                                        </tr>
+                                        <tr>
+                                          <th scope="row">Location</th>
+                                          <td>{{user.location}}</td>
+                                        </tr>
+                                        <tr>
+                                          <th scope="row">Expertese</th>
+                                          <td><div class="row" *ngFor="let u of selectedExpertese">
+                                            <a>{{u}},</a>
+                                          </div></td>
+                                        </tr>
+                                        <tr>
+                                          <th scope="row">Experience</th>
+                                          <td>{{user.experience}}</td>
+                                        </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </div>
+                                  <!-- end of table col-lg-6 -->
+                                </div>
+                                <!-- end of row -->
+                              </div>
+                              <!-- end of general info -->
+                            </div>
+                            <!-- end of col-lg-12 -->
+                          </div>
+                          <!-- end of row -->
+                        </div>
+                        <!-- end of view-info -->
+                        <div class="edit-info" [hidden]="editProfile">
+                          <div *ngIf="userform">
+                              <form [formGroup]="userform" (ngSubmit)="onSubmit(userform.value)">
+                                  <div class="row">
+                                    <div class="col-lg-12">
+                                      <div class="general-info">
+                                        <div class="row">
+                                          <div class="col-lg-6">
+                                            <div class="table-responsive">
+                                              <table class="table">
+                                                <tbody>
+                                                <tr>
+                                                  <td>
+                                                    <div class="input-group">
+                                                      <span class="input-group-addon">First Name *:</span>
+                                                      <input type="text" class="form-control" formControlName="firstName" placeholder="First Name" value="Josephine Villa">
+                                                      <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['firstName'].valid&&userform.controls['firstName'].dirty">
+                                                          <i class="fa fa-close"></i>
+                                                          First Name is required
+                                                      </div>
+                                                    </div>
+                                                  </td>
+                                                </tr>
+                                                <tr>
+                                                  <td>
+                                                      <div class="input-group">
+                                                          <span class="input-group-addon">Last Name *:</span>
+                                                          <input type="text" class="form-control" formControlName="lastName" placeholder="Last Name" value="Josephine Villa">
+                                                          <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['lastName'].valid&&userform.controls['lastName'].dirty">
+                                                              <i class="fa fa-close"></i>
+                                                              Last Name is required
+                                                          </div>
+                                                      </div>
+                                                  </td>
+                                                   
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="input-group">
+                                                        <span class="input-group-addon">Title:</span>
+                                                        <input type="text" class="form-control" formControlName="title" placeholder="Title" value="Josephine Villa">
+                                                          </div>
+                                                    </td>
+                                                     
+                                                  </tr>
+                                                  <tr>
+                                                  <!--  put expertse here -->
+                                                      <td>
+                                                          <div class="input-group">
+                                                              <span class="input-group-addon">Current Employer *:</span>
+                                                              <input type="text" class="form-control" formControlName="currentEmployer" placeholder="Current Employer" value="Josephine Villa">
+                                                              <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['currentEmployer'].valid&&userform.controls['currentEmployer'].dirty">
+                                                                  <i class="fa fa-close"></i>
+                                                                  Current Employer is required
+                                                              </div>
+                                                          </div>
+                                                      </td>
+                                                       
+                                                    </tr>
+                                                </tbody>
+                                              </table>
+                                            </div>
+                                          </div>
+                                          <!-- end of table col-lg-6 -->
+                                          <div class="col-lg-6">
+                                            <div class="table-responsive">
+                                              <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon">Country *:</span>
+                                                                <input type="text" class="form-control" formControlName="country" placeholder="Country" value="Josephine Villa">
+                                                                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['country'].valid&&userform.controls['country'].dirty">
+                                                                    <i class="fa fa-close"></i>
+                                                                    Country is required
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                         
+                                                      </tr>
+                                                      <tr>
+                                                          <td>
+                                                              <div class="input-group">
+                                                                  <span class="input-group-addon">Location *:</span>
+                                                                  <input type="text" class="form-control" formControlName="location" placeholder="Location" value="Josephine Villa">
+                                                                  <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['location'].valid&&userform.controls['location'].dirty">
+                                                                      <i class="fa fa-close"></i>
+                                                                      Location is required
+                                                                  </div>
+                                                              </div>
+                                                          </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon">Expertese *:</span>
+                                                                    <p-multiSelect [options]="experteses" formControlName="expertises" class="form-control" [(ngModel)]="selectedExpertese"></p-multiSelect>
+                                                                    <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['expertises'].valid&&userform.controls['expertises'].dirty">
+                                                                        <i class="fa fa-close"></i>
+                                                                        Atleast 1 expertese is required
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                          </tr>
+                                                          <tr>
+                                                              <td>
+                                                                  <div class="input-group">
+                                                                      <span class="input-group-addon">Experience *:</span>
+                                                                      <select formControlName="experience" class="form-control">
+                                                                          <option value="" selec1ted>---- Experience ----</option>
+                                                                          <option value="No experience">No experience</option>
+                                                                          <option value="1 to 5 year's experience">1 to 5 year's experience</option>
+                                                                          <option value="5 to 10 year's experience">5 to 10 year's experience</option>
+                                                                          <option value="10 to 15 year's experience">10 to 15 year's experience</option>
+                                                                          <option value="15 to 20 year's experience">15 to 20 year's experience</option>
+                                                                          <option value="20 to 25 year's experience">20 to 25 year's experience</option>
+                                                                          <option value="+25 year's experience">+25 year's experience</option>
+                                                                        </select>
+                                                                      <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['experience'].valid&&userform.controls['experience'].dirty">
+                                                                          <i class="fa fa-close"></i>
+                                                                          Experience choice is required
+                                                                      </div>
+                                                                  </div>
+                                                              </td>
+                                                            </tr>
+                                              
+                                                </tbody>
+                                              </table>
+                                            </div>
+                                          </div>
+                                          <!-- end of table col-lg-6 -->
+                                        </div>
+                                        <!-- end of row -->
+                                      </div>
+                                      <!-- end of edit info -->
+                                    </div>
+                                    <!-- end of col-lg-12 -->
+                                  </div>
+                                  <!-- end of row -->
+                                  </form>
+                          </div>
+                           
+                        </div>
+                        <!-- end of edit-info -->
+                      </div>
+                      <!-- end of card-body -->
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <div class="card">
+                          <div class="card-header">
+                            <h5 class="card-header-text">Description About Me</h5>
+                           
+                          </div>
+                          <form [formGroup]="userform" (ngSubmit)="onSubmit(userform.value)">
+                          <div class="card-body user-desc">
+                            <div class="view-desc" *ngIf="editProfile">
+                              <div [innerHTML]="editorContent"></div>
+                            </div>
+                            <div class="edit-desc" [hidden]="editProfile">
+                               
+                              <div class="col-md-12">
+                              
+      
+      
+                                  <div id="toolbar">
+                                      <!-- Add a bold button -->
+                                      <!-- Add font size dropdown -->
+                                      <select class="ql-size">
+                                        <option value="small"></option>
+                                        <!-- Note a missing, thus falsy value, is used to reset to default -->
+                                        <option selected></option>
+                                        <option value="large"></option>
+                                        <option value="huge"></option>
+                                      </select>
+                                      <span class="ql-formats">
+                                          <button class="ql-bold" type="button"><svg viewBox="0 0 18 18"> <path class="ql-stroke" d="M5,4H9.5A2.5,2.5,0,0,1,12,6.5v0A2.5,2.5,0,0,1,9.5,9H5A0,0,0,0,1,5,9V4A0,0,0,0,1,5,4Z"></path> <path class="ql-stroke" d="M5,9h5.5A2.5,2.5,0,0,1,13,11.5v0A2.5,2.5,0,0,1,10.5,14H5a0,0,0,0,1,0,0V9A0,0,0,0,1,5,9Z"></path> </svg></button>
+                                          <button class="ql-italic" type="button"><svg viewBox="0 0 18 18"> <line class="ql-stroke" x1="7" x2="13" y1="4" y2="4"></line> <line class="ql-stroke" x1="5" x2="11" y1="14" y2="14"></line> <line class="ql-stroke" x1="8" x2="10" y1="14" y2="4"></line> </svg></button>
+                                          <button class="ql-underline" type="button"><svg viewBox="0 0 18 18"> <path class="ql-stroke" d="M5,3V9a4.012,4.012,0,0,0,4,4H9a4.012,4.012,0,0,0,4-4V3"></path> <rect class="ql-fill" height="1" rx="0.5" ry="0.5" width="12" x="3" y="15"></rect> </svg></button>
+                                          <button class="ql-strike" type="button"><svg viewBox="0 0 18 18"> <line class="ql-stroke ql-thin" x1="15.5" x2="2.5" y1="8.5" y2="9.5"></line> <path class="ql-fill" d="M9.007,8C6.542,7.791,6,7.519,6,6.5,6,5.792,7.283,5,9,5c1.571,0,2.765.679,2.969,1.309a1,1,0,0,0,1.9-.617C13.356,4.106,11.354,3,9,3,6.2,3,4,4.538,4,6.5a3.2,3.2,0,0,0,.5,1.843Z"></path> <path class="ql-fill" d="M8.984,10C11.457,10.208,12,10.479,12,11.5c0,0.708-1.283,1.5-3,1.5-1.571,0-2.765-.679-2.969-1.309a1,1,0,1,0-1.9.617C4.644,13.894,6.646,15,9,15c2.8,0,5-1.538,5-3.5a3.2,3.2,0,0,0-.5-1.843Z"></path> </svg></button>
+                                          </span>
+                                          <span class="ql-formats">
+                                          <button class="ql-list" value="ordered" type="button"><svg viewBox="0 0 18 18"> <line class="ql-stroke" x1="7" x2="15" y1="4" y2="4"></line> <line class="ql-stroke" x1="7" x2="15" y1="9" y2="9"></line> <line class="ql-stroke" x1="7" x2="15" y1="14" y2="14"></line> <line class="ql-stroke ql-thin" x1="2.5" x2="4.5" y1="5.5" y2="5.5"></line> <path class="ql-fill" d="M3.5,6A0.5,0.5,0,0,1,3,5.5V3.085l-0.276.138A0.5,0.5,0,0,1,2.053,3c-0.124-.247-0.023-0.324.224-0.447l1-.5A0.5,0.5,0,0,1,4,2.5v3A0.5,0.5,0,0,1,3.5,6Z"></path> <path class="ql-stroke ql-thin" d="M4.5,10.5h-2c0-.234,1.85-1.076,1.85-2.234A0.959,0.959,0,0,0,2.5,8.156"></path> <path class="ql-stroke ql-thin" d="M2.5,14.846a0.959,0.959,0,0,0,1.85-.109A0.7,0.7,0,0,0,3.75,14a0.688,0.688,0,0,0,.6-0.736,0.959,0.959,0,0,0-1.85-.109"></path> </svg></button>
+                                          <button class="ql-list" value="bullet" type="button"><svg viewBox="0 0 18 18"> <line class="ql-stroke" x1="6" x2="15" y1="4" y2="4"></line> <line class="ql-stroke" x1="6" x2="15" y1="9" y2="9"></line> <line class="ql-stroke" x1="6" x2="15" y1="14" y2="14"></line> <line class="ql-stroke" x1="3" x2="3" y1="4" y2="4"></line> <line class="ql-stroke" x1="3" x2="3" y1="9" y2="9"></line> <line class="ql-stroke" x1="3" x2="3" y1="14" y2="14"></line> </svg></button>
+                                          <span class="ql-align ql-picker ql-icon-picker"><span class="ql-picker-label" tabindex="0" role="button" aria-expanded="false" aria-controls="ql-picker-options-4"><svg viewBox="0 0 18 18"> <line class="ql-stroke" x1="3" x2="15" y1="9" y2="9"></line> <line class="ql-stroke" x1="3" x2="13" y1="14" y2="14"></line> <line class="ql-stroke" x1="3" x2="9" y1="4" y2="4"></line> </svg></span><span class="ql-picker-options" aria-hidden="true" tabindex="-1" id="ql-picker-options-4"><span tabindex="0" role="button" class="ql-picker-item ql-selected"><svg viewBox="0 0 18 18"> <line class="ql-stroke" x1="3" x2="15" y1="9" y2="9"></line> <line class="ql-stroke" x1="3" x2="13" y1="14" y2="14"></line> <line class="ql-stroke" x1="3" x2="9" y1="4" y2="4"></line> </svg></span><span tabindex="0" role="button" class="ql-picker-item" data-value="center"><svg viewBox="0 0 18 18"> <line class="ql-stroke" x1="15" x2="3" y1="9" y2="9"></line> <line class="ql-stroke" x1="14" x2="4" y1="14" y2="14"></line> <line class="ql-stroke" x1="12" x2="6" y1="4" y2="4"></line> </svg></span><span tabindex="0" role="button" class="ql-picker-item" data-value="right"><svg viewBox="0 0 18 18"> <line class="ql-stroke" x1="15" x2="3" y1="9" y2="9"></line> <line class="ql-stroke" x1="15" x2="5" y1="14" y2="14"></line> <line class="ql-stroke" x1="15" x2="9" y1="4" y2="4"></line> </svg></span><span tabindex="0" role="button" class="ql-picker-item" data-value="justify"><svg viewBox="0 0 18 18"> <line class="ql-stroke" x1="15" x2="3" y1="9" y2="9"></line> <line class="ql-stroke" x1="15" x2="3" y1="14" y2="14"></line> <line class="ql-stroke" x1="15" x2="3" y1="4" y2="4"></line> </svg></span></span></span><select class="ql-align" style="display: none;">
+                                          <option selected=""></option>
+                                          <option value="center"></option>
+                                          <option value="right"></option>
+                                          <option value="justify"></option>
+                                          </select>
+                                          </span>
+                                    </div>
+                                <quill-editor
+                                [(ngModel)]="editorContent"
+                                [options]="editorConfig" formControlName="description" >
+                              </quill-editor>
+                              </div>
+                              <br>
+                              <div class="text-center">
+                                  <button pButton type="submit" *ngIf="!editProfile" [disabled]="!userform.valid" class="btn btn-success m-b-10 m-r-10" label="Save Changes"><i class="icofont icofont-save"></i></button>
+                                  
+                              </div>
+                              <div class="text-center">
+                                  <button class="btn btn-round btn-danger" *ngIf="!userform.valid">Please ensure all fields that are required are filled before saving</button>
+                              </div>
+                                 
+                            </div>
+                          </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- personal card end-->
+                  </div>
+                </ng-template>
+              </ngb-tab>
+              <ngb-tab title="Ratings">
+                <ng-template ngbTabContent>
+                  <div [@fadeInOutTranslate] class="m-t-15">
+                    <div class="card">
+                      <div class="card-header">
+                        <h5 class="card-header-text">Ratings</h5>
+                      </div>
+                      <div class="card-body">
+                        <ul class="media-list">
+                          <div  *ngFor="let rate of ratings">
+                              <li  class="media">
+                                  <div class="media-left">
+                                    <a href="{{'/user/'+rate.raterUsername}}">
+                                      <img class="media-object img-circle comment-img" src="{{rate.raterProfile}}" alt="Generic placeholder image">
+                                    </a>
+                                  </div>
+                                  <div class="media-body">
+                                    <h6 class="media-heading">{{rate.raterUsername}}<span class="f-12 text-muted m-l-5">{{rate.dateCreated.split('T')[0]}}</span></h6>
+                                    <div class="stars-example-css">
+                                      
+                                        <i *ngIf="rate.rate >= 1; else templateName" class="icofont icofont-star" style="color: #4680ff"></i>
+                                      <i *ngIf="rate.rate >= 2; else templateName" class="icofont icofont-star" style="color: #4680ff"></i>
+                                      <i *ngIf="rate.rate >= 3; else templateName" class="icofont icofont-star" style="color: #4680ff"></i>
+                                          <i *ngIf="rate.rate >= 4; else templateName" class="icofont icofont-star" style="color: #4680ff"></i>
+                                          <i *ngIf="rate.rate == 5; else templateName" class="icofont icofont-star" style="color: #4680ff"></i>                                    
+                                      <ng-template #templateName>
+                                          <i class="icofont icofont-star"></i>
+                                      </ng-template>
+                                    </div>
+                                    <p class="m-b-0">{{rate.comment}}</p>
+                                    <hr>
+                                    </div>
+                                </li>
+                          </div>
+                        </ul>
+                        <div *ngIf="!ratings || ratings.length === 0" class="text-center">
+<span><h3>No Ratings recieved for this user</h3></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </ngb-tab>
+            </ngb-tabset>
+          </div>
+        </div>
+      </div>
+      
+</div>
+<!--profile cover start-->

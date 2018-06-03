@@ -1,0 +1,95 @@
+<section class="login p-fixed d-flex text-center bg-primary common-img-bg">
+  <!-- starts -->
+  <div class="auth-fluid">
+    <div class="row">
+      <div class="col-sm-12">
+        <!-- Authentication card start -->
+        <div class="login-card card-body auth-body">
+            <div class="text-center">
+              <img src="assets/images/logo.png" width="250px" height="80px" alt="logo.png">
+            </div>
+            <form class="md-float-material" [formGroup]="userform" (ngSubmit)="login(userform.value)">
+            <div class="auth-box">
+              <div class="row m-b-20">
+                <div class="col-md-12">
+                  <h3 class="text-center txt-primary">Sign up. It is fast and easy.</h3>
+                </div>
+              </div>
+              <p class="text-inverse b-b-default text-left p-b-5">Register your account</p>
+              <div *ngIf="!isFormValid">
+                <p-messages severity="error" [(value)]="usernameError" ></p-messages>
+            </div>
+              <div class="input-group">
+                <input type="text" class="form-control" formControlName="Username" placeholder="Username">
+                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['Username'].valid&&userform.controls['Username'].dirty">
+                    <i class="fa fa-close"></i>
+                    username is required
+                </div>
+            </div>
+            <div class="input-group">
+              <input type="text" class="form-control" formControlName="Email" placeholder="E-Mail Address">
+              <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['Email'].valid&&userform.controls['Email'].dirty">
+                  <i class="fa fa-close"></i>
+                  Email is required
+              </div>
+          </div>
+          <div class="input-group">
+            <input type="password" class="form-control" formControlName="Password" placeholder="Password">
+            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['Password'].valid&&userform.controls['Password'].dirty">
+                <i class="fa fa-close"></i>
+                Password is required
+            </div>
+        </div>
+              <div class="input-group">
+                  <select formControlName="AccountType" class="form-control">
+                      <option selected value="">-- Select a Account Type --</option>
+                      <option value="mentor">Mentor</option>
+                      <option value="startup" selected>Start-Up</option>
+                    </select>
+                    <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['AccountType'].valid&&userform.controls['AccountType'].dirty">
+                      <i class="fa fa-close"></i>
+                      Account Type is required
+                  </div>
+              </div>
+              <div class="row m-t-25 text-left">
+                <div class="col-md-12">
+                  <div class="checkbox-fade fade-in-primary">
+                    <label>
+                      <input formControlName="termsAndConds" type="checkbox" value="">
+                      <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span>
+                      <span class="text-inverse">I read and accept <a href="javascript:;">Terms &amp; Conditions.</a></span>
+                      <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['termsAndConds'].valid&&userform.controls['termsAndConds'].dirty">
+                        <i class="fa fa-close"></i>
+                        Terms and Conditions must be accepted
+                    </div>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="row m-t-30">
+                <div class="col-md-12">
+                  <button pButton type="submit" [disabled]="!userform.valid" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20"><i class="{{icon}}"></i>Sign up now.</button>
+                </div>
+              </div>
+              <hr/>
+              <div class="row">
+                <div class="col-md-10">
+                  <p class="text-inverse text-left m-b-0">Thank you and enjoy our website.</p>
+                  <p class="text-inverse text-left"><b>The Mentor's Lab Team</b></p>
+                </div>
+                <div class="col-md-2">
+                  <img src="assets/images/logo-icon.png" height="50px" width="50px" alt="small-logo.png">
+                </div>
+              </div>
+            </div>
+          </form>
+          <!-- end of form -->
+        </div>
+        <!-- Authentication card end -->
+      </div>
+      <!-- end of col-sm-12 -->
+    </div>
+    <!-- end of row -->
+  </div>
+  <!-- end of -->
+</section>

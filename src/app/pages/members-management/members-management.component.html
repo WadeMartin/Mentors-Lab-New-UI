@@ -1,0 +1,141 @@
+<div class="row">
+        <!-- <li>
+                <button class="btn btn-primary waves-effect" (click)="addToast({title:'Default Toasty', msg:'Turning standard Bootstrap alerts into awesome notifications', timeout: 5000, theme:'default', position:'bottom-right', type:'wait'})">Primary/Wait</button>
+              </li>
+              <li>
+                <button class="btn btn-warning waves-effect" (click)="addToast({title:'Default Toasty', msg:'Turning standard Bootstrap alerts into awesome notifications', timeout: 5000, theme:'default', position:'bottom-right', type:'warning'})">Warning</button>
+              </li> -->
+  <div class="col-sm-12">
+    <app-card>
+     <div class="table-responsive">
+      <table class="table table-striped table-hover table-inverse">
+        <thead>
+          <tr>
+            <th scope="col" style="text-align: center">Username</th>
+            <th scope="col" style="text-align: center">First Name</th>
+            <th scope="col" style="text-align: center">Last Name</th>
+            <th scope="col" style="text-align: center">Location</th>
+            <th scope="col" style="text-align: center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of userProfiles">
+            <td style="text-align: center">{{item.username}}</td>
+            <td style="text-align: center">{{item.firstName}}</td>
+            <td style="text-align: center">{{item.lastName}}</td>
+            <td style="text-align: center">{{item.location}}</td>
+            <td style="text-align: center"><button class="btn btn-primary btn-round" (click)="selectInfo($event, item)" pTooltip="View Members Profile" tooltipPosition="top"><i class="icofont icofont-info-circle"></i></button> <button class="btn btn-success btn-round" (click)="selectRating($event, item)"  pTooltip="Rate Member" tooltipPosition="top"><i class="icofont icofont-star"></i></button> <button class="btn btn-warning btn-round" (click)="selectReport($event, item)"  pTooltip="Report Member" tooltipPosition="top"><i class="icofont icofont-exclamation-circle"></i></button> <button (click)="selectRemove($event, item)"  class="btn btn-danger btn-round" pTooltip="Remove Member" tooltipPosition="top"><i class="icofont icofont-ui-delete"></i></button></td>
+          </tr>
+          
+        </tbody>
+      </table>
+     </div>
+    </app-card>
+  </div>
+</div>
+
+ <!-- info of a member -->
+<p-dialog header="User Details" [(visible)]="infoDialog" [responsive]="true" showEffect="fade" [modal]="true" width="400"
+    (onAfterHide)="onDialogHide()">
+    <div class="ui-g" *ngIf="selectedUser">
+        <div class="ui-g-12" style="text-align:center">
+            <img [src]="selectedUser.profilePicLoc" style="width: 200px; height: 200px">
+        </div>
+        <div class="ui-g-5">Username: </div>
+        <div class="ui-g-7">
+            <b>{{selectedUser.username}}</b>
+        </div>
+
+        <div class="ui-g-5">First Name: </div>
+        <div class="ui-g-7">
+            <b>{{selectedUser.firstName}}</b>
+        </div>
+
+        <div class="ui-g-5">Last Name: </div>
+        <div class="ui-g-7">
+            <b>{{selectedUser.lastName}}</b>
+        </div>
+
+        <div class="ui-g-5">Current Employer: </div>
+        <div class="ui-g-7">
+            <b>{{selectedUser.currentEmployer}}</b>
+        </div>
+
+        <div class="ui-g-5">Title: </div>
+        <div class="ui-g-7">
+            <b>{{selectedUser.title}}</b>
+        </div>
+        <div class="ui-g-5">Description: </div>
+        <div class="ui-g-7">
+                <div [innerHtml]="selectedUser.description">
+
+                    </div>
+            
+        </div>
+        <div class="ui-g-5">Expertises: </div>
+        <div class="ui-g-7">
+                <b>{{selectedUser.expertises}}</b>
+        </div>
+        <div class="ui-g-5">CV Document: </div>
+        <div class="ui-g-7">
+            <button class="btn btn-success" (click)="downloadCV($event)">Download CV</button>
+        </div>
+    </div>
+</p-dialog>
+
+   <!-- reports -->
+<p-dialog header="Report Information" [(visible)]="reportDialog" [responsive]="true" showEffect="fade" [modal]="true" width="600"
+    (onAfterHide)="onDialogHide()">
+    <div class="ui-g" *ngIf="selectedUser">
+        <div class="ui-g-7">Reason for reporting: </div>
+        <div class="ui-g-12">
+            <textarea rows="5" cols="75" [(ngModel)]="reportReason" pInputTextarea autoResize="autoResize"></textarea>
+        </div>
+        <div align="center" class="row">
+            <button class="btn btn-danger" (click)="reportUser($event,user)">Report</button>
+        </div>
+    </div>
+</p-dialog>
+
+
+   <!-- remove member -->
+   <p-dialog header="Verification" [(visible)]="removeDialog" [responsive]="true" showEffect="fade" [modal]="true" width="600"
+   (onAfterHide)="onDialogHide()">
+   <div class="ui-g" align="center" *ngIf="selectedUser">
+       <div class="ui-g-12">Are you sure you want to remove this member: </div>
+       <div class="ui-g-6">
+            <button class="btn btn-primary" (click)="cancelDialog($event,user)">Cancel</button>
+       </div>
+       <div class="ui-g-6">
+           <button class="btn btn-danger" (click)="removeUser($event,user)">Remove</button>
+       </div>
+   </div>
+</p-dialog>
+
+<!-- rate the user -->
+<p-dialog header="Rate this User!" [(visible)]="ratingDialog" [responsive]="true" showEffect="fade" [modal]="true" width="600"
+    (onAfterHide)="onDialogHide()">
+    <div class="ui-g"  *ngIf="selectedUser">
+            <div class="ui-g-12" style="text-align:center">
+                    <img [src]="selectedUser.profilePicLoc" style="width: 150px; height: 150px">
+            </div>
+            <div class="ui-g-12" style="text-align:center">
+                <h4>Wade</h4>
+            </div>
+            <hr >
+            <br />
+        <div class="ui-g-4">Rating for user: </div>
+        <div class="ui-g-8">
+                <p-spinner size="30" required [(ngModel)]="rateValue" [min]="1" [max]="5"></p-spinner>
+        </div>
+        <div class="ui-g-4">Comment: </div>
+        <div class="ui-g-12">
+                <textarea rows="5" cols="75"  [(ngModel)]="rateReason" required pInputTextarea autoResize="autoResize"></textarea>
+        </div>
+        <div class="ui-g-4"></div>
+        <div class="ui-g-6">
+                <button class="btn btn-success" (click)="rateUser($event,user)">Submit Rating</button>
+        </div>
+    </div>
+</p-dialog>
+<ng2-toasty [position]="position"></ng2-toasty>
