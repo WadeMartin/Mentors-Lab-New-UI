@@ -349,7 +349,11 @@ var StartupProfileComponent = (function () {
     };
     StartupProfileComponent.prototype.loadUserInformation = function (username) {
         var _this = this;
-        this.populateMembershipDetails();
+        if (localStorage.getItem('currentUser') !== null && localStorage.getItem('currentUser') !== undefined) {
+            if (username.searchInput == localStorage.getItem('currentUser')) {
+                this.populateMembershipDetails();
+            }
+        }
         var usernameObject = {
             "SearchInput": username.SearchInput
         };
@@ -383,7 +387,7 @@ var StartupProfileComponent = (function () {
             // this.editorContent = res.description;
         }, function (err) {
             console.log('err occured');
-            _this.router.navigate(['dashboard']);
+            _this.router.navigate(['home']);
         }, function () {
             if (_this.user === null || _this.user === undefined) {
                 console.log("goes into this too");
@@ -425,41 +429,42 @@ var StartupProfileComponent = (function () {
                     if (_this.user !== undefined) {
                         _this.populateReviews();
                         _this.declareImageCarousel();
-                        if (_this.ownerProfile == false) {
-                            var monthNames = ["January", "February", "March", "April", "May", "June",
-                                "July", "August", "September", "October", "November", "December"
-                            ];
-                            var update = {
-                                "View": {
-                                    "ViewKey": monthNames[new Date().getMonth()]
-                                },
-                                "Username": _this.user.OwningUsername
-                            };
-                            _this.stat.updateStartUpStat(update).subscribe(function (res) {
-                            });
-                        }
-                    }
-                    else {
-                        _this.router.navigate(['home']);
+                        // if(this.ownerProfile == false){
+                        //   const monthNames = ["January", "February", "March", "April", "May", "June",
+                        //   "July", "August", "September", "October", "November", "December"
+                        // ];
+                        //         let update = { // come back and fix this
+                        //           "View":{
+                        //             "ViewKey": monthNames[new Date().getMonth()]
+                        //           },
+                        //           "Username": this.user.OwningUsername
+                        //         }
+                        //         this.stat.updateStartUpStat(update).subscribe((res:any) =>{
+                        //         });
+                        // }
+                        // }else{
+                        //   this.router.navigate(['home']);
+                        // }
                     }
                 });
             }
             else {
                 _this.populateReviews();
                 _this.declareImageCarousel();
-                if (_this.ownerProfile == false) {
-                    var monthNames = ["January", "February", "March", "April", "May", "June",
-                        "July", "August", "September", "October", "November", "December"
-                    ];
-                    var update = {
-                        "View": {
-                            "ViewKey": monthNames[new Date().getMonth()]
-                        },
-                        "Username": _this.user.OwningUsername
-                    };
-                    _this.stat.updateStartUpStat(update).subscribe(function (res) {
-                    });
-                }
+                //  if(this.ownerProfile == false){
+                //   const monthNames = ["January", "February", "March", "April", "May", "June",
+                //   "July", "August", "September", "October", "November", "December"
+                // ];
+                //         let update = { // come back and fix this
+                //           "View":{
+                //             "ViewKey": monthNames[new Date().getMonth()]
+                //           },
+                //           "Username": this.user.OwningUsername
+                //         }
+                //         this.stat.updateStartUpStat(update).subscribe((res:any) =>{
+                //         });
+                //  }
+                // }
             }
         });
     };
@@ -661,7 +666,7 @@ var StartupProfileComponent = (function () {
         this.subs.getSubscription(user).subscribe(function (res) {
             console.log(res);
             if (res === undefined || res === null) {
-                _this.router.navigateByUrl('/home');
+                _this.router.navigateByUrl('/subscribe');
             }
             else {
                 if (res.planName === "firstplan") {

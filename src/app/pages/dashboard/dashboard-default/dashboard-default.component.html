@@ -1,5 +1,12 @@
+<div *ngIf='!permission' class="row">
+  <div class="col-sm-12">
+    <app-card >
+      <h4>You do not have permission for this page. Upgrade to the 'Growing Plan' in order to view this page.</h4>
+    </app-card>
+  </div>
+</div>
 
-<div class="row">
+<div *ngIf='permission' class="row">
   <!-- card1 start -->
   <div class="col-md-6 col-xl-3">
     <div class="card widget-card-1">
@@ -279,6 +286,7 @@
 
             </div>
           </div>
+      </div>
       </div>
   <!-- Statistics card end -->
   <!-- Statistics card start -->

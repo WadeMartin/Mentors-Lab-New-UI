@@ -34,7 +34,7 @@ export class DashboardDefaultComponent implements OnInit {
   public sortBy = '';
   public sortOrder = 'desc';
   profitChartOption: any;
-
+  permission = false;
   blockContent = true;
   doneLoading = false;
   startupViews: any;
@@ -64,12 +64,12 @@ export class DashboardDefaultComponent implements OnInit {
    months = ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October','November','December'];
   ngOnInit() {
 
-
+ this.populateMembershipDetails();
     this.http.get(`assets/data/data.json`)
       .subscribe((data) => {
         this.data = data.json();
       });
-      this.populateData();
+      
    // this.checkAccountType();
     // AmCharts.makeChart('statistics-chart', {
     //   type: 'serial',
@@ -440,6 +440,35 @@ populateGraph(arr:any){
     }
   });
 }
+
+populateMembershipDetails(){
+  let user = {
+    "username" : localStorage.getItem("currentUser")
+  }
+  this.subs.getSubscription(user).subscribe(
+    (res:any) =>{
+      console.log(res);
+      if(res === undefined || res === null){
+        this.router.navigateByUrl('/home');
+      }
+      else{
+         if(res.planName === "thirdplan"){
+           this.permission = true;
+           this.populateData();
+        }
+        else{
+           
+        }
+      }
+      
+    },
+  err=>{
+    this.router.navigateByUrl('/home');
+  },
+() =>{
+});
+}
+
 
 
 }

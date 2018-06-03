@@ -364,7 +364,12 @@ onSubmits(value: string) {
 
 
 loadUserInformation(username: any){
-  this.populateMembershipDetails();
+if(localStorage.getItem('currentUser') !== null && localStorage.getItem('currentUser') !== undefined){
+  if(username.searchInput == localStorage.getItem('currentUser')){
+    this.populateMembershipDetails();
+  }
+}
+  
   let usernameObject = {
     "SearchInput": username.SearchInput
   }
@@ -402,7 +407,7 @@ loadUserInformation(username: any){
     },
     (err) =>{
       console.log('err occured')
-      this.router.navigate(['dashboard']);
+      this.router.navigate(['home']);
     },
     () =>{
       if(this.user === null || this.user === undefined){
@@ -450,45 +455,45 @@ loadUserInformation(username: any){
             if(this.user !== undefined){
               this.populateReviews();
             this.declareImageCarousel();
-            if(this.ownerProfile == false){
-              const monthNames = ["January", "February", "March", "April", "May", "June",
-              "July", "August", "September", "October", "November", "December"
-            ];
-                    let update = { // come back and fix this
-                      "View":{
-                        "ViewKey": monthNames[new Date().getMonth()]
-                      },
-                      "Username": this.user.OwningUsername
-                    }
-                    this.stat.updateStartUpStat(update).subscribe((res:any) =>{
+            // if(this.ownerProfile == false){
+            //   const monthNames = ["January", "February", "March", "April", "May", "June",
+            //   "July", "August", "September", "October", "November", "December"
+            // ];
+            //         let update = { // come back and fix this
+            //           "View":{
+            //             "ViewKey": monthNames[new Date().getMonth()]
+            //           },
+            //           "Username": this.user.OwningUsername
+            //         }
+            //         this.stat.updateStartUpStat(update).subscribe((res:any) =>{
                 
-                    });
-            }
-            }else{
-              this.router.navigate(['home']);
-            }
-          }
+            //         });
+            // }
+            // }else{
+            //   this.router.navigate(['home']);
+            // }
+          }}
       )
       }
       else{
         this.populateReviews();
         this.declareImageCarousel();
-       if(this.ownerProfile == false){
-        const monthNames = ["January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
-      ];
-              let update = { // come back and fix this
-                "View":{
-                  "ViewKey": monthNames[new Date().getMonth()]
-                },
-                "Username": this.user.OwningUsername
-              }
-              this.stat.updateStartUpStat(update).subscribe((res:any) =>{
+      //  if(this.ownerProfile == false){
+      //   const monthNames = ["January", "February", "March", "April", "May", "June",
+      //   "July", "August", "September", "October", "November", "December"
+      // ];
+      //         let update = { // come back and fix this
+      //           "View":{
+      //             "ViewKey": monthNames[new Date().getMonth()]
+      //           },
+      //           "Username": this.user.OwningUsername
+      //         }
+      //         this.stat.updateStartUpStat(update).subscribe((res:any) =>{
           
-              });
-       }
+      //         });
+      //  }
+      // }
       }
-      
     }
   )
 
@@ -724,7 +729,7 @@ populateMembershipDetails(){
     (res:any) =>{
       console.log(res);
       if(res === undefined || res === null){
-        this.router.navigateByUrl('/home');
+        this.router.navigateByUrl('/subscribe');
       }
       else{
         if(res.planName === "firstplan"){

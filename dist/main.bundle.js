@@ -723,7 +723,7 @@ var TitleComponent = (function () {
                     }
                 });
             } while (currentRoute);
-            _this.titleService.setTitle('Guru Able | ' + title);
+            _this.titleService.setTitle('Mentors Lab | ' + title);
         });
     }
     return TitleComponent;
