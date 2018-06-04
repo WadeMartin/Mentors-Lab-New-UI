@@ -228,7 +228,7 @@
                     </a>
                   </li>
                   <li>
-                    <a [routerLink]="['/authentication/login']">
+                    <a (click)="logout()">
                       <i class="ti-layout-sidebar-left"></i> Logout
                     </a>
                   </li>
@@ -257,7 +257,7 @@
                 <ul>
                   <li [@mobileMenuTop]="isCollapsedSideBar" class="more-details" [ngClass]="isCollapsedSideBar">
                     <a [routerLink]="['/startup',username]"><i class="ti-user"></i>View Startup Profile</a>
-                    <a [routerLink]="['/authentication/login/with-bg-image']"><i class="ti-layout-sidebar-left"></i>Logout</a>
+                    <a (click)="logout()"><i class="ti-layout-sidebar-left"></i>Logout</a>
                   </li>
                 </ul>
               </div>

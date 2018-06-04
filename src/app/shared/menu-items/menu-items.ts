@@ -40,13 +40,6 @@ const MENUITEMS = [
         name: 'Dashboard',
         type: 'link',
         icon: 'ti-home'
-      },
-      {
-        state: 'simple-page',
-        short_label: 'S',
-        name: 'Simple Page',
-        type: 'link',
-        icon: 'ti-layout-sidebar-left'
       }
       ,
       {

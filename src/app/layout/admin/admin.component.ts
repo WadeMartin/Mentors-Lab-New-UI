@@ -202,6 +202,13 @@ type = localStorage.getItem('type')
 
   }
 
+  logout(){
+    localStorage.removeItem("currentUser");
+    localStorage.removeItem("type");
+    this.loginToken = false;
+    this.router.navigateByUrl("/home");
+  }
+
 
 
 
