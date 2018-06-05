@@ -45,6 +45,7 @@ var SearchComponent = (function () {
         this.sendingObject = {};
         this.companyService.searchForCompanies(this.sendingObject).subscribe(function (res) {
             _this.datas = res;
+            console.log(_this.datas);
         }, function (err) {
         }, function () {
         });
@@ -186,7 +187,7 @@ var SearchPipe = (function () {
     SearchPipe.prototype.transform = function (array, query) {
         if (query) {
             console.log("inside the query =>" + query);
-            return __WEBPACK_IMPORTED_MODULE_0_lodash__["filter"](array, function (row) { return row.startupName.toLowerCase().indexOf(query) > -1 || row.location.toLowerCase().indexOf(query) > -1; });
+            return __WEBPACK_IMPORTED_MODULE_0_lodash__["filter"](array, function (row) { return row.companyName.toLowerCase().indexOf(query) > -1 || row.location.toLowerCase().indexOf(query) > -1 || row.expertises.join().toLowerCase().indexOf(query) > -1; });
         }
         return array;
     };

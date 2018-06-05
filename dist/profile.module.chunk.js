@@ -135,6 +135,7 @@ var ProfileComponent = (function () {
             { label: 'Design', value: 'Design' },
             { label: 'Finance', value: 'Finance' },
             { label: 'Fundraising', value: 'Fundraising' },
+            { label: 'Human Resources', value: 'Human Resources' },
             { label: 'IT Infustracture', value: 'IT Infustracture' },
             { label: 'Manufacturing', value: 'Manufacturing' },
             { label: 'Marketing', value: 'Marketing' },

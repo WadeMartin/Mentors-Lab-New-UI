@@ -33,6 +33,7 @@ sendingObject;
   this.companyService.searchForCompanies(this.sendingObject).subscribe(
       (res: any) => {
           this.datas = res;
+          console.log(this.datas)
       },
       err =>{
           

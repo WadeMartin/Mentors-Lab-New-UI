@@ -64,7 +64,9 @@ ownerProfile = false;
   public editor;
   public isSpinnerVisible = true;
   public Spinkit = Spinkit;
-
+  followButtonStyle = "btn btn-primary m-b-10 m-r-10";
+  followButtonDisabled = false;
+  followMessage = "Follow";
   public editorContent;
   public editorConfig : any;
   uploadedFiles: any[] = [];
@@ -193,7 +195,6 @@ sendRequest(){
 
      let request = {
        "Username":localStorage.getItem("currentUser"),
-       "Reason":user.description,
        "StartupName":this.user.companyName
      }
      this.memberRequestService.sendRequest(request).subscribe(
@@ -212,8 +213,8 @@ sendRequest(){
     },
     () =>{
             let update = { // come back and fix this
-              "AmountOfMembersIncrease":1,
-              "Username": this.user.OwningUsername
+              "AmountOfMembersIncrease":"1",
+              "Username": this.user.owningUsername
             }
             this.stat.updateStartUpStat(update).subscribe((res:any) =>{
         
@@ -291,6 +292,7 @@ this.experteses = [
   {label: 'Design', value: 'Design'},
   {label: 'Finance', value: 'Finance'},
   {label: 'Fundraising', value: 'Fundraising'},
+  {label: 'Human Resources', value: 'Human Resources'},
   {label: 'IT Infustracture', value: 'IT Infustracture'},
   {label: 'Manufacturing', value: 'Manufacturing'},
   {label: 'Marketing', value: 'Marketing'},
@@ -310,7 +312,9 @@ this.industrese = [
   {label: 'Design', value: 'Design'},
   {label: 'Finance', value: 'Finance'},
   {label: 'Fundraising', value: 'Fundraising'},
+  {label: 'Human Resources', value: 'Human Resources'},
   {label: 'IT Infustracture', value: 'IT Infustracture'},
+  
   {label: 'Manufacturing', value: 'Manufacturing'},
   {label: 'Marketing', value: 'Marketing'},
   {label: 'Purchasing', value: 'Purchasing'},
@@ -365,7 +369,8 @@ onSubmits(value: string) {
 
 loadUserInformation(username: any){
 if(localStorage.getItem('currentUser') !== null && localStorage.getItem('currentUser') !== undefined){
-  if(username.searchInput == localStorage.getItem('currentUser')){
+  console.log('username object'+ username.SearchInput)
+  if(username.SearchInput == localStorage.getItem('currentUser')){
     this.populateMembershipDetails();
   }
 }
@@ -431,6 +436,7 @@ if(localStorage.getItem('currentUser') !== null && localStorage.getItem('current
               this.editorContent = this.user.description,
               this.imgURL = this.user.logoLoc;
               if(this.user.owningUsername == localStorage.getItem('currentUser')){
+                console.log('same user')
                 this.ownerProfile = true;
               }
             }
@@ -455,23 +461,21 @@ if(localStorage.getItem('currentUser') !== null && localStorage.getItem('current
             if(this.user !== undefined){
               this.populateReviews();
             this.declareImageCarousel();
-            // if(this.ownerProfile == false){
-            //   const monthNames = ["January", "February", "March", "April", "May", "June",
-            //   "July", "August", "September", "October", "November", "December"
-            // ];
-            //         let update = { // come back and fix this
-            //           "View":{
-            //             "ViewKey": monthNames[new Date().getMonth()]
-            //           },
-            //           "Username": this.user.OwningUsername
-            //         }
-            //         this.stat.updateStartUpStat(update).subscribe((res:any) =>{
+         //   if(this.ownerProfile == false){
+              const monthNames = ["January", "February", "March", "April", "May", "June",
+              "July", "August", "September", "October", "November", "December"
+            ];
+                    let update = { // come back and fix this
+                      "View":{
+                        "ViewKey": monthNames[new Date().getMonth()]
+                      },
+                      "Username": this.user.owningUsername
+                    }
+                    this.stat.updateStartUpStat(update).subscribe((res:any) =>{
                 
-            //         });
-            // }
-            // }else{
-            //   this.router.navigate(['home']);
-            // }
+                    });
+           // }
+
           }}
       )
       }
@@ -497,6 +501,32 @@ if(localStorage.getItem('currentUser') !== null && localStorage.getItem('current
     }
   )
 
+}
+
+follow(){
+  if(localStorage.getItem("currentUser") !== null && localStorage.getItem("currentUser") !== undefined){
+    let update = { // come back and fix this
+      "FollowerAdd":localStorage.getItem("currentUser"),
+      "Username": this.user.owningUsername
+    }
+    console.log("gets into success")
+    this.stat.updateStartUpStat(update).subscribe((res:any) =>{
+     
+    },
+  err =>{
+
+  },
+() =>{
+  
+  
+});
+this.followButtonStyle = "btn btn-success m-b-10 m-r-10";
+this.followButtonDisabled = true;
+this.followMessage = "Following"
+  }
+  else{
+    this.loginDisplay = true;
+  }
 }
 
 populateReviews(){
@@ -722,6 +752,7 @@ if(this.user.videos !== null && this.user.videos !== undefined){
 }
 
 populateMembershipDetails(){
+  console.log('gets into checking subscription')
   let user = {
     "username" : localStorage.getItem("currentUser")
   }
@@ -921,16 +952,19 @@ onSubmit(value: string){
           },
         () =>{
           if(event == 'Twitter'){
-            this.router.navigateByUrl(this.user.twitterURL);
+            window.open(this.user.twitterURL, "_blank");
           }
           else if(event == 'Facebook'){
-            this.router.navigateByUrl(this.user.facebookURL);
+            window.open(this.user.facebookURL, "_blank");
+
           }
           else if(event == 'Instagram'){
-            this.router.navigateByUrl(this.user.instagramURL);
+            window.open(this.user.instagramURL, "_blank");
+
           }
           else if(event == 'Linkden'){
-            this.router.navigateByUrl(this.user.linkdenURL);
+            window.open(this.user.linkdenURL, "_blank");
+
           }
           
         });
